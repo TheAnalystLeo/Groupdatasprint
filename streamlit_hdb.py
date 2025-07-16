@@ -52,6 +52,7 @@ input_df = pd.DataFrame(input_features, index=[0])
 
 expected_features = loaded_model.feature_names_in_  # Fetch the feature names from the model
 input_df = input_df[expected_features]  # Reorder input_df to match expected features
+
 # Make prediction based on features when the button is pressed
 if st.button("Predict"):
     predicted_price = loaded_model.predict(input_df)[0]
