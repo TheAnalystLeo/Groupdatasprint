@@ -3,18 +3,20 @@ import joblib
 import streamlit as st
 
 # Load the model
-loaded_model = joblib.load(r'C:\Users\username\path\to\your\model\random_forest_model.pkl')  # Change to your path
-# Streamlit UI
+loaded_model = joblib.load(r'/Users/leonard/Downloads/random_forest_model.pkl')
 st.title(":house: HDB Resale Price Predictor")
 st.write("Please fill in the values below to predict the resale price:")
+
 # User inputs
-floor_area = st.number_input("Floor Area (sqm)", min_value=31, max_value=166, value=31, step=1)
-exec_sold = st.number_input("Executive Flats Sold Nearby", min_value=0, max_value=132, value=0, step=1)
-five_room_sold = st.number_input("5-Room Flats Sold Nearby", min_value=0, max_value=161, value=0, step=1)
-max_floor_lvl = st.number_input("Max Floor Level", min_value=6, max_value=22, value=6, step=1)
-hawker_dist = st.number_input("Distance to Nearest Hawker Centre (m)", min_value=9, max_value=3635, value=100, step=1)
+floor_area = st.number_input("Floor Area (sqm)", min_value=0, max_value=1000, value=0, step=1)
+exec_sold = st.number_input("Executive Flats Sold Nearby", min_value=0, max_value=200, value=0, step=1)
+five_room_sold = st.number_input("5-Room Flats Sold Nearby", min_value=0, max_value=200, value=0, step=1)
+max_floor_lvl = st.number_input("Max Floor Level", min_value=1, max_value=50, value=1, step=1)
+hawker_dist = st.number_input("Distance to Nearest Hawker Centre (m)", min_value=1, max_value=5000, value=100, step=1)
+
 # Dropdown for region selection
-region = st.selectbox('Town Region', ['North', 'South', 'East', 'West'])
+region = st.selectbox('Town Region', ['North', 'South', 'East', 'West', 'Central'])
+
 # Prepare dummy variables for the region
 region_features = {
     'zone_north': 0,
@@ -30,6 +32,7 @@ elif region == "East":
     region_features['zone_east'] = 1
 elif region == "West":
     region_features['zone_west'] = 1
+
 # Prepare input features as a DataFrame
 input_features = {
     'floor_area_sqm': floor_area,
@@ -44,7 +47,9 @@ input_features = {
 }
 # Create DataFrame from input features
 input_df = pd.DataFrame(input_features, index=[0])
+
 # Ensure column order matches the model's expectations
+
 expected_features = loaded_model.feature_names_in_  # Fetch the feature names from the model
 input_df = input_df[expected_features]  # Reorder input_df to match expected features
 # Make prediction based on features when the button is pressed
