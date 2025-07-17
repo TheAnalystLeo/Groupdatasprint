@@ -12,7 +12,6 @@ exec_sold = st.number_input("Executive Flats Sold Nearby", min_value=0, max_valu
 five_room_sold = st.number_input("5-Room Flats Sold Nearby", min_value=0, max_value=200, value=0, step=1)
 three_room_sold = st.number_input("3-Room Flats Sold Nearby", min_value=0, max_value=200, value=0, step=1)
 max_floor_lvl = st.number_input("Max Floor Level", min_value=1, max_value=50, value=12, step=1)
-hawker_dist = st.number_input("Distance to Nearest Hawker Centre (m)", min_value=0, max_value=5000, value=300, step=1)
 hdb_age = st.number_input("Age of the HDB (years)", min_value=0, max_value=99, value=30, step=1)
 total_dwelling_units = st.number_input("Total Dwelling Units in Block", min_value=0, max_value=1000, value=100, step=1)
 # Dropdown for region selection
@@ -40,7 +39,6 @@ input_features = {
     '5room_sold': five_room_sold,
     '3room_sold': three_room_sold,
     'max_floor_lvl': max_floor_lvl,
-    'Hawker_Nearest_Distance': hawker_dist,
     'hdb_age': hdb_age,
     'total_dwelling_units': total_dwelling_units,
     'zone_north': region_features['zone_north'],
